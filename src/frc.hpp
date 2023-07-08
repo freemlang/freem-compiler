@@ -6,3 +6,13 @@
 #include <iostream>
 
 // TODO: 여기서 프로그램에 필요한 추가 헤더를 참조합니다.
+
+void test() {
+	Test a();
+	
+}
+
+class Test {
+public:
+	int a;
+};

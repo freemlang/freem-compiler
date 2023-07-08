@@ -1,7 +1,4 @@
-﻿# CMakeList.txt: freem-compiler에 대한 CMake 프로젝트, 여기에 소스를 포함하고
-# 프로젝트 특정 논리를 정의합니다.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -11,11 +8,23 @@ endif()
 
 project ("freem-compiler")
 
-# 이 프로젝트의 실행 파일에 소스를 추가합니다.
-add_executable (frc "src/frc.cpp" "src/frc.h")
+
+
+add_executable (
+	frc # binary file name
+	"src/frc.cpp"
+	"src/frc.hpp"
+	"src/argparser.hpp"
+)
+
+set (Boost_ROOT "lib/boost_1_82_0")
+set (Boost_LIBRARY_DIR "lib/boost_1_82_0/stage/lib")
+set (Boost_INCLUDE_DIR ${Boost_ROOT})
+include_directories(${Boost_INCLUDE_DIR})
+link_directories(${Boost_LIBRARY_DIR})
+target_link_libraries(frc ${Boost_LIBRARIES})
+
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET frc PROPERTY CXX_STANDARD 20)
 endif()
-
-# TODO: 필요한 경우 테스트를 추가하고 대상을 설치합니다.
